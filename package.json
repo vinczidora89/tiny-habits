@@ -1,0 +1,43 @@
+{
+  "name": "habits",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "NODE_ENV=test vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "chart.js": "^2.9.4",
+    "core-js": "^3.6.5",
+    "cypress": "^9.5.0",
+    "draggable-vue-directive": "^2.1.0",
+    "moment": "^2.29.1",
+    "sinon": "^13.0.1",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.1",
+    "vue2-flip-countdown": "^0.12.1",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-mocha": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.3.6",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "null-loader": "^4.0.1",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "sinon-chai": "^3.7.0",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

@@ -1,0 +1,61 @@
+@import "../style/colors";
+@import "../style/media-selectors";
+
+#app {
+    box-sizing: border-box;
+    color: $color-black;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+a:active,
+a:hover,
+a:link,
+a:visited {
+  color: $color-black;
+  text-decoration: none;
+}
+
+%title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    margin: 0 auto 20px;
+
+    @media #{$mobile} {
+        font-size: 24px;
+        margin: 12px auto;
+    }
+}
+
+@mixin button-option ($base: $color-honey, $font: $color-black, $padding: 12px 16px) {
+    background-color: $base;
+    border: 0;
+    border-radius: 8px;
+    color: $font;
+    cursor: pointer;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: unset;
+    padding: $padding;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: darken($base, 10%);
+    }
+
+    &:focus {
+        border: 0;
+        box-shadow: 0 0 0 2px $color-black;
+        outline: unset;
+    }
+
+    &:disabled {
+        background-color: $color-grey;
+    }
+}
