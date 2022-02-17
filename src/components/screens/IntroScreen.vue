@@ -7,19 +7,18 @@
       <span class="intro__description">
         Improving your life is much easier than you think.
         Whether it's losing weight, sleeping more, or restoring your work/life balance
-        - the secret is to start small.
+        - the secret is to <strong>start small</strong>.
       </span>
       <span class="intro__description">
-        The world expert on this is Silicon Valley legend BJ Fogg, pioneering research psychologist
-        and founder of the iconic Behaviour Design Lab at Stanford.
+        The world expert on this is Silicon Valley legend
+        <strong>BJ Fogg</strong>, pioneering research psychologist
+        and  <strong>founder of the iconic Behaviour Design Lab</strong> at Stanford.
       </span>
       <span class="intro__description">
-        Focus on what is easy to change, not what is hard;
+        Focus on what is <strong>easy to change</strong>, not what is hard;
         focus on what you want to do, not what you should do.
       </span>
-      <div class="intro__chart-wrapper">
-        <line-chart :chart-data="chartData" :chart-options="chartOptions"/>
-      </div>
+      <BehaviourChart></BehaviourChart>
       <button @click="setCurrentScreen('GoalScreen')"
               class="intro__button">
         Let's get started!
@@ -29,64 +28,12 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import LineChart from '../Chart.vue';
+import BehaviourChart from '../BehaviourChart.vue';
 
 export default {
   name: 'IntroScreen',
   components: {
-    LineChart,
-  },
-  data() {
-    return {
-      chartData: {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        datasets: [
-          {
-            label: 'Actually doing a behaviour',
-            data: [10, 6.66, 4.44, 2.96, 1.97, 1.32, 0.88, 0.58, 0.39, 0.26],
-            fill: false,
-            borderColor: '#2554FF',
-            backgroundColor: '#2554FF',
-            borderWidth: 1,
-          },
-        ],
-      },
-      chartOptions: {
-        scales: {
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'necessary motivation level',
-            },
-            ticks: {
-              beginAtZero: true,
-              display: false,
-            },
-            gridLines: {
-              display: true,
-            },
-          }],
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'required ability',
-            },
-            ticks: {
-              beginAtZero: false,
-              display: false,
-            },
-            gridLines: {
-              display: false,
-            },
-          }],
-        },
-        legend: {
-          display: true,
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-      },
-    };
+    BehaviourChart,
   },
   methods: {
     ...mapMutations('navigation', ['setCurrentScreen']),
@@ -97,7 +44,6 @@ export default {
 <style scoped lang="scss">
 @import "../../style/base";
 @import "../../style/colors";
-@import "../../style/media-selectors";
 
 .intro {
   margin: 0 auto;
@@ -122,26 +68,9 @@ export default {
     text-align: left;
   }
 
-  &__chart {
-    &-wrapper {
-      height: 300px;
-      margin: 0 auto;
-      max-width: 300px;
-      width: 100%;
-    }
-  }
-
   &__button {
     @include button-option();
     margin: 20px 0;
-  }
-
-  @media #{$mobile} {
-    &__chart {
-      &-wrapper {
-        height: auto;
-      }
-    }
   }
 }
 </style>
