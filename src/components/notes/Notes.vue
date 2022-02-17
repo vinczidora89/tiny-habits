@@ -1,6 +1,10 @@
 <template>
     <div class="notes">
-      <button v-if="showAddButton" @click="addNote" class="notes__button">+ Add note</button>
+      <button v-if="showAddButton"
+              @click="$emit('addNewNote')"
+              class="notes__button">
+        + Add note
+      </button>
       <div class="notes__wrapper">
         <Note v-for="(note, index) in notesConfig"
               :key="index"
@@ -14,7 +18,8 @@
               :type="note.type"
               @editNoteContent="editNoteContent"
               @deleteNote="deleteNote"
-              @setNotePosition="setNotePosition">
+              @setNotePosition="setNotePosition"
+              @setUnsaved="setUnsaved">
         </Note>
       </div>
     </div>
@@ -66,17 +71,8 @@ export default {
   components: {
     Note,
   },
-  data() {
-    return {
-      notes: [
-        { content: 'I want to play music in a band!!', type: 'brown' },
-        { content: 'I want to get healthier', type: 'yellow' },
-        { content: 'I want to get healthier', type: 'orange' },
-      ],
-    };
-  },
   methods: {
-    addNote() {
+    /* addNote() {
       const randomIndex = Math.floor(Math.random() * 3);
       const newNote = {
         id: this.notesConfig.length,
@@ -86,7 +82,7 @@ export default {
         top: null,
       };
       this.$emit('addNewNote', newNote);
-    },
+    }, */
     editNoteContent(id, text) {
       this.$emit('editNote', { id, text });
     },
@@ -95,6 +91,9 @@ export default {
     },
     setNotePosition(id, left, top) {
       this.$emit('setNotePosition', { id, left, top });
+    },
+    setUnsaved(value) {
+      this.$emit('setUnsaved', value);
     },
   },
 };

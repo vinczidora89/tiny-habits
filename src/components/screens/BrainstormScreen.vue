@@ -9,10 +9,12 @@
     <GoalSummary class="brainstorm__goal"></GoalSummary>
 
     <span class="brainstorm__description">
-      To start collecting ideas, click on the "start brainstorming" button below.
+      To start collecting ideas, click on the <strong>"start brainstorming"</strong> button below.
+    </span>
+    <span class="brainstorm__description">
       You can write on the post-it notes, and add new ones with the "Add note" button.
       If you are ready before the 5 minute countdown is finished,
-      click on the "next" button below the post-it notes.
+      click on the <strong>"next"</strong> button below the post-it notes.
     </span>
 
     <button v-if="isTimerButtonVisible"
@@ -35,11 +37,16 @@
            :empty-note-placeholder="notePlaceholder"
            :should-be-draggable="false"
            :should-be-editable="true"
-           @addNewNote="addBrainstormNote"
+           @addNewNote="addNote"
            @deleteNote="deleteBrainstormNote"
            @editNote="editBrainstormNote"
+           @setUnsaved="setBrainstormNoteUnsavedChanges"
            :notes-config="brainstormNotes">
     </Notes>
+
+    <span v-if="brainstormNoteUnsavedChanges" class="brainstorm__notes-unsaved">
+      There are notes with unsaved changes. Please save them before you move to the next screen!
+    </span>
 
     <button v-if="isTimerVisible"
             @click="moveToNextScreen"
@@ -66,6 +73,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import brainstormNote from '../../store/schemas/brainstormNote';
 import GoalSummary from '../goals/GoalSummary.vue';
 import Modal from '../Modal.vue';
 import Notes from '../notes/Notes.vue';
@@ -83,7 +91,7 @@ export default {
     return {
       countdownStarted: false,
       countdownCompleted: false,
-      notePlaceholder: 'write a behaviour here',
+      notePlaceholder: '...',
       isEmptyModalVisible: false,
     };
   },
@@ -93,8 +101,18 @@ export default {
       'deleteBrainstormNote',
       'editBrainstormNote',
       'removePlaceholderBrainstormNotes',
+      'setBrainstormNotes',
+      'setBrainstormNoteUnsavedChanges',
     ]),
     ...mapMutations('navigation', ['setCurrentScreen']),
+    addNote() {
+      const randomIndex = Math.floor(Math.random() * 3);
+      const newNote = { ...brainstormNote };
+      newNote.content = this.notePlaceholder;
+      newNote.id = this.brainstormNotes.length;
+      newNote.type = this.noteColourTypes[randomIndex];
+      this.addBrainstormNote(newNote);
+    },
     setCountdownStarted(value) {
       this.countdownStarted = value;
     },
@@ -129,7 +147,13 @@ export default {
     },
   },
   computed: {
-    ...mapState('habits', ['brainstormNotes', 'goalDescription', 'noteColourTypes', 'selectedGoal']),
+    ...mapState('habits', [
+      'brainstormNotes',
+      'brainstormNoteUnsavedChanges',
+      'goalDescription',
+      'noteColourTypes',
+      'selectedGoal',
+    ]),
     isTimerButtonVisible() {
       return !this.countdownStarted;
     },
@@ -168,6 +192,14 @@ export default {
 
     &__notes {
       min-height: 206px;
+
+      &-unsaved {
+        display: block;
+        font-size: 11px;
+        margin: 0 auto;
+        max-width: 300px;
+        text-align: center;
+      }
     }
 
     &__timer-button {
@@ -178,7 +210,7 @@ export default {
     &__next-button {
       @include button-option($color-rouge);
       display: block;
-      margin: 40px auto 0;
+      margin: 20px auto 0;
       width: 200px;
     }
   }

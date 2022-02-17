@@ -6,9 +6,7 @@
             @click="this.$emit('deleteNote', this.id)"
             class="note__delete">
       </span>
-      <span class="note__content"
-            :contenteditable="this.shouldBeEditable"
-            @keyup="updateText">
+      <span class="note__content">
         {{ content }}
       </span>
     </div>
@@ -18,14 +16,15 @@
             @click="$emit('deleteNote', id)"
             class="note__delete">
       </span>
-      <span class="note__content"
-            ref="note"
-            :contenteditable="this.shouldBeEditable">
-        {{ content }}
-      </span>
+      <label for="textbox"></label>
+      <textarea name="textbox"
+                id="textbox"
+                v-model="textInput"
+                class="note__content-textbox">
+      </textarea>
       <span v-if="shouldBeEditable"
             @click="updateText"
-            class="note__save">
+            :class="['note__save', {'is-visible': textChanged}]">
         Save changes
       </span>
     </div>
@@ -83,14 +82,20 @@ export default {
         boundingElement: undefined,
         onDragEnd: this.onDragEnd,
       },
+      textInput: this.content,
     };
   },
   methods: {
     updateText() {
-      this.$emit('editNoteContent', this.id, this.$refs.note.innerText);
+      this.$emit('editNoteContent', this.id, this.textInput);
     },
     onDragEnd(positionDiff, absolutePosition) {
       this.$emit('setNotePosition', this.id, absolutePosition.left, absolutePosition.top);
+    },
+  },
+  computed: {
+    textChanged() {
+      return this.textInput !== this.content;
     },
   },
   watch: {
@@ -98,6 +103,9 @@ export default {
       if (newVal) {
         this.draggableValue.boundingElement = newVal;
       }
+    },
+    textChanged(newVal) {
+      this.$emit('setUnsaved', newVal);
     },
   },
 };
@@ -118,7 +126,7 @@ export default {
     color: $color-black;
     cursor: pointer;
     flex: 0 0 120px;
-    font-size: 14px;
+    font-size: 13px;
     height: 120px;
     margin: 10px;
     padding: 15px;
@@ -147,9 +155,9 @@ export default {
 
     &.small {
       flex: 0 0 100px;
-      font-size: 14px;
+      font-size: 12px;
       height: 100px;
-      padding: 15px;
+      padding: 10px;
       width: 100px;
 
       .note {
@@ -159,12 +167,27 @@ export default {
           height: 15px;
           width: 15px;
         }
+
+        &__content {
+          &-textbox {
+            height: 70px;
+            width: 80px;
+          }
+        }
       }
     }
   }
 
   &__content {
-    outline: none;
+    &-textbox {
+      background: transparent;
+      border: none;
+      height: 75px;
+      outline: none;
+      overflow: hidden;
+      resize: none;
+      width: 90px;
+    }
   }
 
   &__delete {
@@ -179,11 +202,24 @@ export default {
   }
 
   &__save {
+    bottom: 5px;
     cursor:pointer;
     display: block;
     font-size: 12px;
+    height: 0;
+    left: 15px;
     margin: 6px 0;
+    opacity: 0;
+    position: absolute;
     text-decoration: underline;
+    visibility: hidden;
+
+    &.is-visible {
+      height: 12px;
+      opacity: 1;
+      transition: all 0.5s ease-in;
+      visibility: visible;
+    }
   }
 }
 </style>

@@ -1,19 +1,11 @@
 import HttpService from '../../services/HttpService';
+import brainstormNote from '../schemas/brainstormNote';
 
 export default {
   namespaced: true,
   state: {
-    brainstormNotes: [
-      {
-        content: 'write a behaviour here', type: 'brown', left: null, top: null,
-      },
-      {
-        content: 'write a behaviour here', type: 'yellow', left: null, top: null,
-      },
-      {
-        content: 'write a behaviour here', type: 'orange', left: null, top: null,
-      },
-    ],
+    brainstormNotes: [],
+    brainstormNoteUnsavedChanges: false,
     goalDescription: null,
     goalList: null,
     goldenBehaviour: null,
@@ -39,6 +31,9 @@ export default {
     },
     setBrainstormNotes(state, value) {
       state.brainstormNotes = value;
+    },
+    setBrainstormNoteUnsavedChanges(state, value) {
+      state.brainstormNoteUnsavedChanges = value;
     },
     setGoalDescription(state, value) {
       state.goalDescription = value;
@@ -80,6 +75,10 @@ export default {
         .then((response) => {
           commit('setGoalList', response.data[0].goalList);
           commit('setNoteColourTypes', response.data[0].noteColourTypes);
+          const note = { ...brainstormNote };
+          note.content = '...';
+          [note.type] = state.noteColourTypes;
+          commit('setBrainstormNotes', [note]);
         })
         .catch(() => {
           commit('setHasError', true);
