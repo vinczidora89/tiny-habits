@@ -45,7 +45,7 @@ export default {
 
 .app {
   align-items: center;
-  background: url('./assets/images/bgr_2.jpg') center no-repeat;
+  background: url('assets/images/bgr_large.jpg') center no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-items: center;
@@ -62,10 +62,19 @@ export default {
     width: 100%;
   }
 
+  @media #{$tablet} {
+    background: url('assets/images/bgr_small.jpg') bottom center no-repeat;
+    background-size: 100% 100%;
+  }
+
   @media #{$mobile} {
+    align-items: flex-start;
+    background-image: none;
+
     &__wrapper {
+      border-radius: 0;
+      box-shadow: none;
       margin: 10px auto;
-      max-width: 80%;
     }
   }
 }
