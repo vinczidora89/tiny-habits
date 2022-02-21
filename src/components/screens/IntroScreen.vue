@@ -18,7 +18,7 @@
         Focus on what is <strong>easy to change</strong>, not what is hard;
         focus on what you want to do, not what you should do.
       </span>
-      <BehaviourChart></BehaviourChart>
+      <BehaviourChart class="intro__behaviour-chart"></BehaviourChart>
       <button @click="setCurrentScreen('GoalScreen')"
               class="intro__button">
         Let's get started!
