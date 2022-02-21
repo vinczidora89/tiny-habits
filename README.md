@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Run json-server to mock the backend database for the API requests
+```
+json-server --watch src/db/db.json
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
@@ -27,3 +32,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
