@@ -8,15 +8,8 @@
       </span>
       <GoalSummary class="dashboard__goal"></GoalSummary>
       <span class="dashboard__tiny-habit-label">Your Tiny Habit:</span>
-      <Note :content="goldenBehaviour.content"
-            empty-note-placeholder="..."
-            :id="0"
-            :should-be-draggable="false"
-            :should-be-editable="false"
-            :should-be-deletable="false"
-            :type="goldenBehaviour.type"
-            class="dashboard__tiny-habit-note">
-      </Note>
+      <GoldenBehaviourNote :is-small="false" class="dashboard__tiny-habit-note">
+      </GoldenBehaviourNote>
       <div class="dashboard__progress">
         <span class="dashboard__progress-label">
           Track your progress here:
@@ -33,14 +26,14 @@
 
 <script>
 import { mapState } from 'vuex';
+import GoldenBehaviourNote from '../notes/GoldenBehaviourNote.vue';
 import GoalSummary from '../goals/GoalSummary.vue';
-import Note from '../notes/Note.vue';
 
 export default {
   name: 'DashboardScreen',
   components: {
     GoalSummary,
-    Note,
+    GoldenBehaviourNote,
   },
   data() {
     return {

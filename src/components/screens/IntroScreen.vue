@@ -28,7 +28,7 @@
 
 <script>
 import { mapMutations } from 'vuex';
-import BehaviourChart from '../BehaviourChart.vue';
+import BehaviourChart from '../charts/BehaviourChart.vue';
 
 export default {
   name: 'IntroScreen',

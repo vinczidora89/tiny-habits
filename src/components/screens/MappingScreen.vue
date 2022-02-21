@@ -70,15 +70,7 @@
           <span class="mapping__modal-text">
             Your golden behaviour is:
           </span>
-          <Note :content="goldenBehaviour.content"
-                empty-note-placeholder="..."
-                :id="0"
-                note-size="small"
-                :should-be-draggable="false"
-                :should-be-editable="false"
-                :should-be-deletable="false"
-                :type="goldenBehaviour.type">
-          </Note>
+          <GoldenBehaviourNote></GoldenBehaviourNote>
         </div>
       </template>
     </Modal>
@@ -87,15 +79,15 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
+import GoldenBehaviourNote from '../notes/GoldenBehaviourNote.vue';
 import Modal from '../Modal.vue';
-import Note from '../notes/Note.vue';
 import Notes from '../notes/Notes.vue';
 
 export default {
   name: 'MappingScreen.vue',
   components: {
+    GoldenBehaviourNote,
     Modal,
-    Note,
     Notes,
   },
   mounted() {

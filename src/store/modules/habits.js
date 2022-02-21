@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     brainstormNotes: [],
-    brainstormNoteUnsavedChanges: false,
+    brainstormNoteUnsavedChanges: 0,
     goalDescription: null,
     goalList: null,
     goldenBehaviour: null,
@@ -33,7 +33,7 @@ export default {
       state.brainstormNotes = value;
     },
     setBrainstormNoteUnsavedChanges(state, value) {
-      state.brainstormNoteUnsavedChanges = value;
+      state.brainstormNoteUnsavedChanges += value;
     },
     setGoalDescription(state, value) {
       state.goalDescription = value;
@@ -52,6 +52,9 @@ export default {
     },
     setGoldenBehaviour(state, value) {
       state.goldenBehaviour = state.brainstormNotes[value];
+    },
+    setGoldenBehaviourContent(state, value) {
+      state.goldenBehaviour.content = value.text;
     },
     setSelectedGoal(state, value) {
       state.selectedGoal = value;

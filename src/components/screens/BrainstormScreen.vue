@@ -44,12 +44,13 @@
            :notes-config="brainstormNotes">
     </Notes>
 
-    <span v-if="brainstormNoteUnsavedChanges" class="brainstorm__notes-unsaved">
+    <span v-if="unsavedChanges" class="brainstorm__notes-unsaved">
       There are notes with unsaved changes. Please save them before you move to the next screen!
     </span>
 
     <button v-if="isTimerVisible"
             @click="moveToNextScreen"
+            :disabled="unsavedChanges"
             class="brainstorm__next-button">
       next
     </button>
@@ -159,6 +160,9 @@ export default {
     },
     isTimerVisible() {
       return this.countdownStarted && !this.countdownCompleted;
+    },
+    unsavedChanges() {
+      return this.brainstormNoteUnsavedChanges !== 0;
     },
   },
 };

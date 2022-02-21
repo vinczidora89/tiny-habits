@@ -69,8 +69,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../style/colors";
-  @import "../style/media-selectors";
+  @import "../../style/media-selectors";
 
   .behaviour-chart {
     height: 300px;

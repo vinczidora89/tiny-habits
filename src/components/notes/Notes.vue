@@ -72,17 +72,6 @@ export default {
     Note,
   },
   methods: {
-    /* addNote() {
-      const randomIndex = Math.floor(Math.random() * 3);
-      const newNote = {
-        id: this.notesConfig.length,
-        content: this.emptyNotePlaceholder,
-        type: this.colourTypes[randomIndex],
-        left: null,
-        top: null,
-      };
-      this.$emit('addNewNote', newNote);
-    }, */
     editNoteContent(id, text) {
       this.$emit('editNote', { id, text });
     },

@@ -105,7 +105,8 @@ export default {
       }
     },
     textChanged(newVal) {
-      this.$emit('setUnsaved', newVal);
+      const unsavedValue = newVal ? 1 : -1;
+      this.$emit('setUnsaved', unsavedValue);
     },
   },
 };
