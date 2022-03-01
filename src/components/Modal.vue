@@ -5,11 +5,11 @@
         <button type="button" class="modal__button-close" @click="secondaryAction">
         </button>
 
-        <div v-if="!hasError && isLoading" class="modal__loader-wrapper">
+        <div v-if="shouldShowLoading" class="modal__loader-wrapper">
           <Loader></Loader>
         </div>
 
-        <div v-if="hasError && !isLoading" class="modal__error-wrapper">
+        <div v-if="shouldShowError" class="modal__error-wrapper">
           <img class="modal__error-icon" src="../assets/icons/error.svg" alt="error icon">
           <span class="modal__error-text">
             Unfortunately something went wrong.
@@ -24,7 +24,7 @@
           </button>
         </div>
 
-        <div v-if="!(hasError || isLoading)" class="modal__wrapper">
+        <div v-if="shouldShowContent" class="modal__wrapper">
           <h3 class="modal__header">
             <slot name="header"></slot>
           </h3>
@@ -82,6 +82,15 @@ export default {
   },
   computed: {
     ...mapState('habits', ['hasError', 'isLoading']),
+    shouldShowError() {
+      return this.hasError && !this.isLoading;
+    },
+    shouldShowLoading() {
+      return !this.hasError && this.isLoading;
+    },
+    shouldShowContent() {
+      return !(this.hasError || this.isLoading);
+    },
   },
 };
 </script>
