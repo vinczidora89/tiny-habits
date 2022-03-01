@@ -20,17 +20,16 @@
       start setting a goal
     </button>
 
-    <Timer v-if="isTimerVisible"
-           :countdown-completed="countdownCompleted"
-           :countdown-minutes="5"
-           :countdown-started="countdownStarted"
-           @handleCountdownFinish="handleCountdownFinish"
-           @setCountdownStarted="setCountdownStarted">
-    </Timer>
+    <Countdown  v-if="isTimerVisible"
+                :countdown-minutes="5"
+                class="goal__timer-clock"
+                @handleCountdownFinish="handleCountdownFinish">
+    </Countdown>
 
     <GoalList v-if="countdownStarted"
               :countdown-completed="countdownCompleted"
-              @showModal="showConfirmModal"
+              @showConfirmModal="showConfirmModal"
+              @showMissingGoalModal="showMissingGoalModal"
               @resetCountdown="resetCountdown">
     </GoalList>
 
@@ -68,18 +67,18 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
+import Countdown from '../Countdown.vue';
 import GoalList from '../goals/GoalList.vue';
 import GoalSummary from '../goals/GoalSummary.vue';
 import Modal from '../Modal.vue';
-import Timer from '../Timer.vue';
 
 export default {
   name: 'GoalScreen.vue',
   components: {
+    Countdown,
     GoalList,
     GoalSummary,
     Modal,
-    Timer,
   },
   data() {
     return {
@@ -103,11 +102,6 @@ export default {
     },
     handleCountdownFinish() {
       this.setCountdownCompleted(true);
-      if (this.goalDescription) {
-        this.showConfirmModal();
-      } else {
-        this.showMissingGoalModal();
-      }
     },
     resetCountdown() {
       this.setCountdownStarted(false);
@@ -174,6 +168,10 @@ export default {
       @include button-option();
       display: block;
       margin: 20px auto;
+    }
+
+    &__timer-clock {
+      margin: 0 auto;
     }
   }
 

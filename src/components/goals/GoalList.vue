@@ -64,7 +64,9 @@ export default {
       this.setGoalDescription(value);
       this.$emit('resetCountdown');
       if (value) {
-        this.$emit('showModal');
+        this.$emit('showConfirmModal');
+      } else {
+        this.$emit('showMissingGoalModal');
       }
     },
   },

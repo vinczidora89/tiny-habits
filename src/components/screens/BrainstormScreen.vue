@@ -23,13 +23,10 @@
       start brainstorming
     </button>
 
-    <Timer v-if="isTimerVisible"
-           :countdown-completed="countdownCompleted"
-           :countdown-minutes="5"
-           :countdown-started="countdownStarted"
-           @handleCountdownFinish="handleCountdownFinish"
-           @setCountdownStarted="setCountdownStarted">
-    </Timer>
+    <Countdown v-if="isTimerVisible"
+               :countdown-minutes="5"
+               @handleCountdownFinish="handleCountdownFinish">
+    </Countdown>
 
     <Notes v-if="countdownStarted"
            class="brainstorm__notes"
@@ -75,18 +72,18 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 import brainstormNote from '../../store/schemas/brainstormNote';
+import Countdown from '../Countdown.vue';
 import GoalSummary from '../goals/GoalSummary.vue';
 import Modal from '../Modal.vue';
 import Notes from '../notes/Notes.vue';
-import Timer from '../Timer.vue';
 
 export default {
   name: 'BrainstormScreen.vue',
   components: {
+    Countdown,
     GoalSummary,
     Modal,
     Notes,
-    Timer,
   },
   data() {
     return {
