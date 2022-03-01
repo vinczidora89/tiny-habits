@@ -28,7 +28,7 @@
                @handleCountdownFinish="handleCountdownFinish">
     </Countdown>
 
-    <Notes v-if="countdownStarted"
+    <NotesList v-if="countdownStarted"
            class="brainstorm__notes"
            :colour-types="noteColourTypes"
            :empty-note-placeholder="notePlaceholder"
@@ -39,7 +39,7 @@
            @editNote="editBrainstormNote"
            @setUnsaved="setBrainstormNoteUnsavedChanges"
            :notes-config="brainstormNotes">
-    </Notes>
+    </NotesList>
 
     <span v-if="unsavedChanges" class="brainstorm__notes-unsaved">
       There are notes with unsaved changes. Please save them before you move to the next screen!
@@ -52,7 +52,7 @@
       next
     </button>
 
-    <Modal v-show="isEmptyModalVisible"
+    <ModalItem v-show="isEmptyModalVisible"
            button-text-secondary="restart"
            @secondaryAction="restartCountdown"
            @close="closeEmptyModal">
@@ -64,7 +64,7 @@
           Your time is up and you haven't written behaviours yet. Would you like to restart?
         </span>
       </template>
-    </Modal>
+    </ModalItem>
 
   </div>
 </template>
@@ -72,18 +72,18 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 import brainstormNote from '../../store/schemas/brainstormNote';
-import Countdown from '../Countdown.vue';
+import Countdown from '../CountDown.vue';
 import GoalSummary from '../goals/GoalSummary.vue';
-import Modal from '../Modal.vue';
-import Notes from '../notes/Notes.vue';
+import ModalItem from '../ModalItem.vue';
+import NotesList from '../notes/NotesList.vue';
 
 export default {
   name: 'BrainstormScreen.vue',
   components: {
     Countdown,
     GoalSummary,
-    Modal,
-    Notes,
+    ModalItem,
+    NotesList,
   },
   data() {
     return {

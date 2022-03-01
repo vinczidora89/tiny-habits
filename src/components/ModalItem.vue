@@ -6,7 +6,7 @@
         </button>
 
         <div v-if="shouldShowLoading" class="modal__loader-wrapper">
-          <Loader></Loader>
+          <LoaderItem></LoaderItem>
         </div>
 
         <div v-if="shouldShowError" class="modal__error-wrapper">
@@ -54,12 +54,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import Loader from './Loader.vue';
+import LoaderItem from './LoaderItem.vue';
 
 export default {
-  name: 'Modal.vue',
+  name: 'ModalItem.vue',
   components: {
-    Loader,
+    LoaderItem,
   },
   props: {
     buttonTextPrimary: {

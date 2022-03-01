@@ -6,7 +6,7 @@
         + Add note
       </button>
       <div class="notes__wrapper">
-        <Note v-for="(note, index) in notesConfig"
+        <NoteItem v-for="(note, index) in notesConfig"
               :key="index"
               :bounding-box="boundingBox"
               :content="note.content"
@@ -20,17 +20,17 @@
               @deleteNote="deleteNote"
               @setNotePosition="setNotePosition"
               @setUnsaved="setUnsaved">
-        </Note>
+        </NoteItem>
       </div>
     </div>
 </template>
 
 <script>
 import { Draggable } from 'draggable-vue-directive';
-import Note from './Note.vue';
+import NoteItem from './NoteItem.vue';
 
 export default {
-  name: 'Notes.vue',
+  name: 'NotesList.vue',
   props: {
     boundingBox: {
       type: HTMLElement,
@@ -69,7 +69,7 @@ export default {
     Draggable,
   },
   components: {
-    Note,
+    NoteItem,
   },
   methods: {
     editNoteContent(id, text) {

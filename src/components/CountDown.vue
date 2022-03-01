@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'Countdown',
+  name: 'CountDown.vue',
   data() {
     return {
       countdown: null,

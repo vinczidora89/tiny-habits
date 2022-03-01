@@ -37,7 +37,7 @@ export default {
   directives: {
     Draggable,
   },
-  name: 'Note.vue',
+  name: 'NoteItem.vue',
   props: {
     boundingBox: {
       type: HTMLElement,

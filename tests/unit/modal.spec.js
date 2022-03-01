@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Modal from '@/components/Modal.vue';
+import ModalItem from '@/components/ModalItem.vue';
 import habits from '../../src/store/modules/habits';
 
 chai.use(sinonChai);
@@ -33,7 +33,7 @@ describe('Modal', () => {
     const buttonTextPrimary = 'primary button';
     const buttonTextSecondary = 'secondary button';
 
-    component = shallowMount(Modal, {
+    component = shallowMount(ModalItem, {
       store,
       localVue,
       propsData: { buttonTextPrimary, buttonTextSecondary },
@@ -52,7 +52,7 @@ describe('Modal', () => {
     setIsLoading(habits.state, false);
   });
 
-  describe('Modal.vue', () => {
+  describe('ModalItem.vue', () => {
     it('sets shouldShowContent computed property and visible content', () => {
       expect(componentInstance.shouldShowContent).to.be.eql(true);
       expect(componentInstance.shouldShowLoading).to.be.eql(false);
@@ -62,7 +62,7 @@ describe('Modal', () => {
     });
   });
 
-  describe('Modal.vue', () => {
+  describe('ModalItem.vue', () => {
     it('sets shouldShowLoading computed property and visible loading', async () => {
       const { setIsLoading } = habits.mutations;
       setIsLoading(habits.state, true);
@@ -76,7 +76,7 @@ describe('Modal', () => {
     });
   });
 
-  describe('Modal.vue', () => {
+  describe('ModalItem.vue', () => {
     it('sets shouldShowError computed property and visible error', async () => {
       const { setHasError } = habits.mutations;
       setHasError(habits.state, true);
@@ -90,14 +90,14 @@ describe('Modal', () => {
     });
   });
 
-  describe('Modal.vue', () => {
+  describe('ModalItem.vue', () => {
     it('renders button when props are passed', () => {
       expect(primaryButton.text()).to.include('primary button');
       expect(secondaryButton.text()).to.include('secondary button');
     });
   });
 
-  describe('Modal.vue', () => {
+  describe('ModalItem.vue', () => {
     it('emits a primary event on primary button click', () => {
       primaryButton.trigger('click');
       expect(component.emitted().primaryAction.length).to.be.equal(1);

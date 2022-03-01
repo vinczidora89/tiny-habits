@@ -39,7 +39,7 @@
       mapping__chart-axis--y-label-low">
         low impact
       </span>
-      <Notes :bounding-box="boundingBox"
+      <NotesList :bounding-box="boundingBox"
              :colour-types="noteColourTypes"
              note-size="small"
              :should-be-draggable="true"
@@ -47,7 +47,7 @@
              :show-add-button="false"
              :notes-config="brainstormNotes"
              @setNotePosition="setBrainstormNotePosition">
-      </Notes>
+      </NotesList>
     </div>
 
     <button @click="setGoldenBehaviour"
@@ -55,7 +55,7 @@
       choose golden
     </button>
 
-    <Modal v-if="goldenBehaviour"
+    <ModalItem v-if="goldenBehaviour"
            v-show="isGoldenModalVisible"
            button-text-primary="move on"
            button-text-secondary="change"
@@ -73,22 +73,22 @@
           <GoldenBehaviourNote></GoldenBehaviourNote>
         </div>
       </template>
-    </Modal>
+    </ModalItem>
   </div>
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
 import GoldenBehaviourNote from '../notes/GoldenBehaviourNote.vue';
-import Modal from '../Modal.vue';
-import Notes from '../notes/Notes.vue';
+import ModalItem from '../ModalItem.vue';
+import NotesList from '../notes/NotesList.vue';
 
 export default {
   name: 'MappingScreen.vue',
   components: {
     GoldenBehaviourNote,
-    Modal,
-    Notes,
+    ModalItem,
+    NotesList,
   },
   mounted() {
     this.boundingBox = this.$refs.chart;

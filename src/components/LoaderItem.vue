@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'Loader.vue',
+  name: 'LoaderItem.vue',
 };
 </script>
 

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LineChart from './Chart.vue';
+import LineChart from './BaseChart.vue';
 
 export default {
   name: 'BehaviourChart',

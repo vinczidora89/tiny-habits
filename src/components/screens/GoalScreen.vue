@@ -20,11 +20,11 @@
       start setting a goal
     </button>
 
-    <Countdown  v-if="isTimerVisible"
+    <CountDown  v-if="isTimerVisible"
                 :countdown-minutes="5"
                 class="goal__timer-clock"
                 @handleCountdownFinish="handleCountdownFinish">
-    </Countdown>
+    </CountDown>
 
     <GoalList v-if="countdownStarted"
               :countdown-completed="countdownCompleted"
@@ -33,7 +33,7 @@
               @resetCountdown="resetCountdown">
     </GoalList>
 
-    <Modal v-show="isConfirmModalVisible"
+    <ModalItem v-show="isConfirmModalVisible"
            button-text-primary="move on"
            button-text-secondary="modify goal"
            @primaryAction="submitGoal"
@@ -46,9 +46,9 @@
         <GoalSummary class="modal__goals"></GoalSummary>
         <span class="modal-text">Are you ready to move on?</span>
       </template>
-    </Modal>
+    </ModalItem>
 
-    <Modal v-show="isMissingGoalModalVisible"
+    <ModalItem v-show="isMissingGoalModalVisible"
            button-text-secondary="restart"
            @secondaryAction="restartCountdown"
            @close="closeMissingGoalModal">
@@ -60,25 +60,25 @@
           Your time is up and you haven't written a goal yet. Would you like to restart?
         </span>
       </template>
-    </Modal>
+    </ModalItem>
 
   </div>
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
-import Countdown from '../Countdown.vue';
+import CountDown from '../CountDown.vue';
 import GoalList from '../goals/GoalList.vue';
 import GoalSummary from '../goals/GoalSummary.vue';
-import Modal from '../Modal.vue';
+import ModalItem from '../ModalItem.vue';
 
 export default {
   name: 'GoalScreen.vue',
   components: {
-    Countdown,
+    CountDown,
     GoalList,
     GoalSummary,
-    Modal,
+    ModalItem,
   },
   data() {
     return {

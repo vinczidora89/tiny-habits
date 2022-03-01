@@ -12,7 +12,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import Note from './Note.vue';
+import Note from './NoteItem.vue';
 
 export default {
   name: 'GoldenBehaviourNote.vue',
